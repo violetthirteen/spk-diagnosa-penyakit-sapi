@@ -1,4 +1,11 @@
-$app = Application::configure(basePath: dirname(__DIR__))
+<?php
+
+use App\Http\Middleware\AdminMiddleware;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Http\Request;
+
+return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
@@ -17,27 +24,3 @@ $app = Application::configure(basePath: dirname(__DIR__))
         );
     })
     ->create();
-
-if (getenv('VERCEL')) {
-    $tmpBase = '/tmp/storage';
-
-    foreach ([
-        '',
-        '/framework',
-        '/framework/views',
-        '/framework/cache',
-        '/framework/cache/data',
-        '/logs',
-        '/app'
-    ] as $sub) {
-        $p = $tmpBase . $sub;
-
-        if (!is_dir($p)) {
-            mkdir($p, 0755, true);
-        }
-    }
-
-    $app->useStoragePath($tmpBase);
-}
-
-return $app;
