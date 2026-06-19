@@ -3,6 +3,7 @@
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Http\Middleware\TrustProxies;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -16,6 +17,15 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => AdminMiddleware::class,
         ]);
+
+        $middleware->trustProxies(
+            at: '*',
+            headers: TrustProxies::HEADER_X_FORWARDED_FOR |
+                     TrustProxies::HEADER_X_FORWARDED_HOST |
+                     TrustProxies::HEADER_X_FORWARDED_PORT |
+                     TrustProxies::HEADER_X_FORWARDED_PROTO |
+                     TrustProxies::HEADER_X_FORWARDED_PREFIX,
+        );
 
     })
     ->withExceptions(function (Exceptions $exceptions): void {
