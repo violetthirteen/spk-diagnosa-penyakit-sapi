@@ -412,13 +412,13 @@ body::after{
             </h1>
 
             <h2>
-                Menggunakan Metode Forward Chaining
+                Menggunakan Metode Certainty Factor
             </h2>
 
             <p>
                 Aplikasi berbasis web yang membantu proses identifikasi penyakit
-                pada sapi secara cepat dan terstruktur berdasarkan gejala yang
-                dipilih pengguna menggunakan metode Forward Chaining.
+                pada sapi                 secara cepat dan terstruktur berdasarkan gejala yang
+                dipilih pengguna menggunakan metode Certainty Factor.
             </p>
 
             <div class="hero-buttons">

@@ -23,3 +23,15 @@ return Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*'),
         );
     })->create();
+
+// Vercel serverless: redirect writable storage to /tmp
+if (getenv('VERCEL')) {
+    $tmpBase = '/tmp/storage';
+    foreach (['', '/framework', '/framework/views', '/framework/cache', '/framework/cache/data', '/logs', '/app'] as $sub) {
+        $p = $tmpBase . $sub;
+        if (!is_dir($p)) {
+            mkdir($p, 0755, true);
+        }
+    }
+    $app->useStoragePath($tmpBase);
+}

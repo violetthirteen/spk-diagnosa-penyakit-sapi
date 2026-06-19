@@ -217,28 +217,22 @@
 
 .d-penyakit-card {
     background: #fff;
-    border-radius: 16px;
+    border-radius: 24px;
     overflow: hidden;
     border: 1px solid #e2e8f0;
-    transition: all .25s ease;
-    box-shadow: 0 2px 8px rgba(15,23,42,.04);
+    transition: all .3s ease;
+    box-shadow: 0 4px 16px rgba(15,23,42,.06);
 }
 
 .d-penyakit-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(15,23,42,.08);
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(15,23,42,.12);
     border-color: #bfdbfe;
 }
 
 .d-penyakit-img {
     width: 100%;
-    height: 140px;
-    background: #f1f5f9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    color: #93c5fd;
+    height: 220px;
     overflow: hidden;
 }
 
@@ -246,14 +240,19 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform .35s ease;
+}
+
+.d-penyakit-card:hover .d-penyakit-img img {
+    transform: scale(1.04);
 }
 
 .d-penyakit-body {
-    padding: 16px 16px 18px;
+    padding: 18px 20px 22px;
 }
 
 .d-penyakit-name {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: #0f172a;
     margin-bottom: 6px;
@@ -262,7 +261,7 @@
 .d-penyakit-desc {
     font-size: 13px;
     color: #64748b;
-    line-height: 1.6;
+    line-height: 1.7;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -500,7 +499,7 @@
 /* Responsive */
 @media(max-width: 1024px) {
     .d-grid-5 {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -674,13 +673,11 @@
     </div>
     <div class="d-grid-5">
         @foreach($penyakitList as $index => $item)
+        @php $imgNum = min($index + 1, 10); @endphp
         <div class="d-penyakit-card">
             <div class="d-penyakit-img">
-                @php $imgPath = 'images/penyakit/penyakit' . ($index + 1) . '.jpg'; @endphp
-                @if(file_exists(public_path($imgPath)))
-                    <img src="{{ asset($imgPath) }}" alt="{{ $item->nama_penyakit }}">
-                @else
-                    🐄
+                @if(file_exists(public_path('images/penyakit' . $imgNum . '.jpg')))
+                    <img src="{{ asset('images/penyakit' . $imgNum . '.jpg') }}" alt="{{ $item->nama_penyakit }}">
                 @endif
             </div>
             <div class="d-penyakit-body">

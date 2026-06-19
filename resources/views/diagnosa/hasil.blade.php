@@ -11,7 +11,7 @@
 
 <div style="max-width:780px;margin:0 auto;">
 
-    <div style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:16px 16px 0 0;padding:28px 32px;text-align:center;">
+    <div class="report-header" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:16px 16px 0 0;padding:28px 32px;text-align:center;">
         <h1 style="font-size:20px;font-weight:800;color:white;letter-spacing:.3px;">
             LAPORAN HASIL DIAGNOSA
         </h1>
@@ -191,15 +191,18 @@
 
 </div>
 
+@push('styles')
 <style media="print">
+    *{-webkit-print-color-adjust:exact !important;color-adjust:exact !important;}
     .sidebar, footer, .topbar, .alert, .menu-toggle, .topbar-title, noscript{display:none !important;}
     .main-wrapper{margin-left:0 !important;padding:0 !important;}
     .main-content{padding:0 !important;}
     body{background:white !important;}
     body::before, body::after{display:none !important;}
     .btn-outline, .btn-primary, .btn{display:none !important;}
-    .main-content a[onclick]{display:inline-flex !important;}
+    .report-header{background:#1d4ed8 !important;background-color:#1d4ed8 !important;color:white !important;}
     @page{margin:15mm;}
 </style>
+@endpush
 
 @endsection

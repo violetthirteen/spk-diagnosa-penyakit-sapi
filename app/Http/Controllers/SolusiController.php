@@ -18,6 +18,13 @@ class SolusiController extends Controller
         return view('solusi.index', compact('solusi', 'search'));
     }
 
+    public function show(string $id)
+    {
+        $solusi = Solusi::findOrFail($id);
+
+        return redirect('/solusi');
+    }
+
     public function create()
     {
         return view('solusi.create');
