@@ -423,12 +423,12 @@ body::after{
 
             <div class="hero-buttons">
 
-                <a href="{{ route('login') }}" class="hero-btn primary">
+                <a href="{{ route('login', absolute: false) }}" class="hero-btn primary">
                     Login Sistem
                 </a>
 
                 @if(Route::has('register'))
-                <a href="{{ route('register') }}" class="hero-btn secondary">
+                <a href="{{ route('register', absolute: false) }}" class="hero-btn secondary">
                     Register
                 </a>
                 @endif

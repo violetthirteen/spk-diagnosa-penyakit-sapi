@@ -382,7 +382,7 @@
 
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login', absolute: false) }}">
             @csrf
 
             <div class="form-group">
@@ -435,7 +435,7 @@
             </button>
 
             @if (Route::has('password.request'))
-                <a class="forgot" href="{{ route('password.request') }}">
+                <a class="forgot" href="{{ route('password.request', absolute: false) }}">
                     Forgot your password?
                 </a>
             @endif
@@ -445,7 +445,7 @@
 
                     Don't have an account?
 
-                    <a href="{{ route('register') }}">
+                    <a href="{{ route('register', absolute: false) }}">
                         Register Here
                     </a>
 

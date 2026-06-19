@@ -212,7 +212,7 @@
                 Informasi Akun
             </div>
 
-            <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('profile.update', absolute: false) }}" enctype="multipart/form-data">
                 @csrf
                 @method('patch')
 
@@ -254,7 +254,7 @@
                 Keamanan
             </div>
 
-            <form method="post" action="{{ route('password.update') }}">
+            <form method="post" action="{{ route('password.update', absolute: false) }}">
                 @csrf
                 @method('put')
 

@@ -3,7 +3,6 @@
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Http\Middleware\TrustProxies;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -18,14 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => AdminMiddleware::class,
         ]);
 
-        $middleware->trustProxies(
-            at: '*',
-            headers: TrustProxies::HEADER_X_FORWARDED_FOR |
-                     TrustProxies::HEADER_X_FORWARDED_HOST |
-                     TrustProxies::HEADER_X_FORWARDED_PORT |
-                     TrustProxies::HEADER_X_FORWARDED_PROTO |
-                     TrustProxies::HEADER_X_FORWARDED_PREFIX,
-        );
+        $middleware->trustProxies(at: '*');
 
     })
     ->withExceptions(function (Exceptions $exceptions): void {
@@ -34,3 +26,15 @@ return Application::configure(basePath: dirname(__DIR__))
         );
     })
     ->create();
+
+// Vercel serverless: redirect writable storage to /tmp
+if (getenv('VERCEL')) {
+    $tmpBase = '/tmp/storage';
+    foreach (['', '/framework', '/framework/views', '/framework/cache', '/framework/cache/data', '/logs', '/app'] as $sub) {
+        $p = $tmpBase . $sub;
+        if (!is_dir($p)) {
+            mkdir($p, 0755, true);
+        }
+    }
+    $app->useStoragePath($tmpBase);
+}
